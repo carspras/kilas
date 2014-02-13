@@ -2,15 +2,21 @@
 
 #include <iostream>
 
-ClubManager::ClubManager()
-{
+ClubManager::ClubManager() {
+}
+
+unsigned int ClubManager::clubCount() const {
+    if (idToClubMap_.size() == clubToIdMap_.size())
+        return idToClubMap_.size();
+    else
+        return 0;
 }
 
 unsigned int ClubManager::createClub(std::string name) {
-    if (nameInUse(name))
+    if (name.size() == 0 || nameInUse(name))
         return 0;
 
-    Club* club = new Club(name);
+    Club* const club = new Club(name);
     unsigned int id = 1;
     if (idToClubMap_.size() != 0)
         id = (idToClubMap_.rbegin()->first) + 1;
@@ -22,9 +28,9 @@ unsigned int ClubManager::createClub(std::string name) {
 }
 
 bool ClubManager::deleteClub(unsigned int id) {
-    int found = idToClubMap_.erase(id);
-    if (found) {
-        const Club* club = getClub(id);
+    Club* const club = getClub(id);
+    if (club) {
+        idToClubMap_.erase(id);
         clubToIdMap_.erase(club);
         delete(club);
         return true;
@@ -32,36 +38,50 @@ bool ClubManager::deleteClub(unsigned int id) {
         return false;
 }
 
-bool ClubManager::deleteClub(const Club* club) {
-    int found = clubToIdMap_.erase(club);
-
-    if (found) {
-        idToClubMap_.erase(getId(club));
+bool ClubManager::deleteClub(Club* const club) {
+    unsigned int id = getId(club);
+    if (id) {
+        clubToIdMap_.erase(club);
+        idToClubMap_.erase(id);
         delete(club);
         return true;
     } else
         return false;
 }
 
-unsigned int ClubManager::getId(const Club* club) {
-    if (clubToIdMap_.find(club) != clubToIdMap_.end())
-        return clubToIdMap_[club];
+unsigned int ClubManager::getId(Club* const club) const {
+    if (clubToIdMap_.count(club) == 1)
+        return clubToIdMap_.at(club);
     else
         return 0;
 }
 
-const Club* ClubManager::getClub(unsigned int id) {
-    if (idToClubMap_.find(id) != idToClubMap_.end())
-        return idToClubMap_[id];
+Club* ClubManager::getClub(unsigned int id) const {
+    if (idToClubMap_.count(id) == 1)
+        return idToClubMap_.at(id);
     else
         return nullptr;
+}
+
+bool ClubManager::setNewName(Club* club, std::string newName) const {
+    if (!club || newName.size() == 0)
+        return false;
+
+    if (newName == club->getName())
+        return true;
+
+    if (nameInUse(newName))
+        return false;
+
+    club->name_ = newName;
+    return true;
 }
 
 bool ClubManager::nameInUse(std::string name) const {
     if (clubToIdMap_.size() == 0)
         return false;
 
-    for (std::pair<const Club*, unsigned int> pair : clubToIdMap_) {
+    for (std::pair<Club* const, unsigned int> pair : clubToIdMap_) {
         if (pair.first->getName() == name)
             return true;
     }

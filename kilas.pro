@@ -16,11 +16,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     club.cpp \
-    clubmanager.cpp
+    clubmanager.cpp \
+    athlete.cpp \
+    testing/test.cpp
 
 HEADERS  += mainwindow.h \
     club.h \
     globals.h \
-    clubmanager.h
+    clubmanager.h \
+    athlete.h \
+    testing/test.h
 
 FORMS    += mainwindow.ui

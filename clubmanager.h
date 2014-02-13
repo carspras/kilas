@@ -6,11 +6,22 @@
 #include <map>
 #include <string>
 
-
-class ClubManager
-{
+/**
+ * @brief The ClubManager class manages the creation and deletion of Clubs.
+ *
+ * Assigns every Club a unique ID and assures that every Club name is unique.
+ * New Clubs should only be created by using ClubManager::createClub() and deleted by using
+ * ClubManager::deleteClub().
+ */
+class ClubManager {
 public:
     ClubManager();
+
+    /**
+     * @brief clubCount returns the count of Clubs registered with the ClubManager
+     * @return Count of the Clubs
+     */
+    unsigned int clubCount() const;
 
     /**
      * @brief Creates a new Club with a unique ID.
@@ -31,21 +42,27 @@ public:
      * @param club The to be deleted Club
      * @return false if the Club was not found.
      */
-    bool deleteClub(const Club* club);
+    bool deleteClub(Club* const club);
 
     /**
      * @brief Returns the ID of the specified Club
      * @param club
      * @return The ID of the specified Club; 0 if the Club is not found
      */
-    unsigned int getId(const Club* club);
+    unsigned int getId(Club* const club) const;
 
     /**
      * @brief Returns a pointer to the Club with the specified id
      * @param id
      * @return The Club to the specified ID; nullptr if the ID is not found
      */
-    const Club* getClub(unsigned int id);
+    Club* getClub(unsigned int id) const;
+
+    /**
+     * @brief Sets newName as the name for the specified Club, if that name is not already in use.
+     * @return true if the name was not already in use, false else.
+     */
+    bool setNewName(Club* club, std::string newName) const ;
 
 private:
     /**
@@ -55,8 +72,15 @@ private:
      */
     bool nameInUse(std::string name) const;
 
-    std::map<const Club*, unsigned int, compare_club> clubToIdMap_;
-    std::map<unsigned int, const Club*> idToClubMap_;
+    /**
+     * @brief clubToIdMap_ is the map from the Clubs to the corresponding IDs.
+     */
+    std::map<Club* const, unsigned int, compare_club> clubToIdMap_;
+
+    /**
+     * @brief idToClubMap_ is the from the Club-IDs to the corresping Clubs.
+     */
+    std::map<unsigned int, Club* const> idToClubMap_;
 };
 
 #endif // CLUBMANAGER_H
