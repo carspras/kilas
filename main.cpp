@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-    TEST::testClubManager();
+    TEST::test();
 
     QApplication a(argc, argv);
     MainWindow w;

@@ -34,8 +34,9 @@ bool ClubManager::deleteClub(unsigned int id) {
         clubToIdMap_.erase(club);
         delete(club);
         return true;
-    } else
-        return false;
+    }
+
+    return false;
 }
 
 bool ClubManager::deleteClub(Club* const club) {
@@ -45,8 +46,9 @@ bool ClubManager::deleteClub(Club* const club) {
         idToClubMap_.erase(id);
         delete(club);
         return true;
-    } else
-        return false;
+    }
+
+    return false;
 }
 
 unsigned int ClubManager::getId(Club* const club) const {

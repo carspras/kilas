@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     club.cpp \
     clubmanager.cpp \
     athlete.cpp \
-    testing/test.cpp
+    testing/test.cpp \
+    athletemanager.cpp
 
 HEADERS  += mainwindow.h \
     club.h \
     globals.h \
     clubmanager.h \
     athlete.h \
-    testing/test.h
+    testing/test.h \
+    athletemanager.h
 
 FORMS    += mainwindow.ui

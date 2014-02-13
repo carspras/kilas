@@ -11,6 +11,7 @@
  */
 class Club {
 friend class ClubManager;
+friend class TEST;
 public:
     /**
      * @brief Returns the name of the Club.
