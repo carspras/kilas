@@ -1,6 +1,7 @@
 #include "athlete.h"
 
-Athlete::Athlete() {
+Athlete::Athlete(unsigned short number) {
+    number_ = number;
 }
 
 unsigned short Athlete::getNumber() const {

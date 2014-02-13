@@ -10,6 +10,7 @@
  */
 class Athlete {
 friend class AthleteManager;
+friend class TEST;
 public:
     /**
      * @brief Returns the bib number of this Athlete
@@ -38,9 +39,10 @@ public:
 
 private:
     /**
-     * @brief Use AthleteManager::createAthlete() instead
+     * @brief Use AthleteManager::createAthlete(unsigned short number) instead.
+     * @param number The number of the new Athlete
      */
-    Athlete();
+    Athlete(unsigned short number);
 
     /**
      * @brief The bib number of this Athlete
@@ -61,6 +63,24 @@ private:
      * @brief The Club of this Athlete
      */
     Club* club_;
+};
+
+/**
+ * @brief The compare_athlete struct is used to compare two Athletes.
+ */
+struct compare_athlete {
+    /**
+     * @brief operator () returns true if number of the first Athlete < number of the second Athlete
+     * @param a The first Athlete
+     * @param b The second Athlete
+     * @return true if number of a < number of b, false else.
+     */
+    bool operator() (Athlete* const a, Athlete* const b) const {
+        if (a->getNumber() < b->getNumber())
+            return true;
+        else
+            return false;
+    }
 };
 
 #endif // ATHLETE_H
