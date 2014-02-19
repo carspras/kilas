@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-    TEST::test();
+    kilas::TEST::test();
 
     QApplication a(argc, argv);
     MainWindow w;

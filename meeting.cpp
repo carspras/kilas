@@ -1,5 +1,7 @@
 #include "meeting.h"
 
-Meeting::Meeting()
-{
+using namespace kilas;
+
+Meeting::Meeting() {
 }
+

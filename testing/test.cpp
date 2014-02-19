@@ -4,10 +4,11 @@
 
 #include <iostream>
 
+using namespace std;
+using namespace kilas;
+
 TEST::TEST() {
 }
-
-using namespace std;
 
 void TEST::test() {
     TEST::testClubManager();

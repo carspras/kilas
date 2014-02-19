@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QMAKE_CXXFLAGS += -std=c++11
+CONFIG += c++11
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -19,7 +20,11 @@ SOURCES += main.cpp\
     clubmanager.cpp \
     athlete.cpp \
     testing/test.cpp \
-    athletemanager.cpp
+    athletemanager.cpp \
+    group.cpp \
+    team.cpp \
+    meeting.cpp \
+    teammanager.cpp
 
 HEADERS  += mainwindow.h \
     club.h \
@@ -27,6 +32,10 @@ HEADERS  += mainwindow.h \
     clubmanager.h \
     athlete.h \
     testing/test.h \
-    athletemanager.h
+    athletemanager.h \
+    group.h \
+    team.h \
+    meeting.h \
+    teammanager.h
 
 FORMS    += mainwindow.ui

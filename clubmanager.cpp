@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+using namespace kilas;
+
 ClubManager::ClubManager() {
 }
 
@@ -54,15 +56,13 @@ bool ClubManager::deleteClub(Club* const club) {
 unsigned int ClubManager::getId(Club* const club) const {
     if (clubToIdMap_.count(club) == 1)
         return clubToIdMap_.at(club);
-    else
-        return 0;
+    return 0;
 }
 
 Club* ClubManager::getClub(unsigned int id) const {
     if (idToClubMap_.count(id) == 1)
         return idToClubMap_.at(id);
-    else
-        return nullptr;
+    return nullptr;
 }
 
 bool ClubManager::setNewName(Club* club, std::string newName) const {

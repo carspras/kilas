@@ -3,6 +3,8 @@
 
 #include <string>
 
+namespace kilas {
+
 /**
  * @brief Each instance of the Club class represents a Club with a unique name.
  *
@@ -52,5 +54,7 @@ struct compare_club {
             return false;
     }
 };
+
+} //namespace kilas
 
 #endif // CLUB_H

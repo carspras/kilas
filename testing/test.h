@@ -1,8 +1,9 @@
 #ifndef TEST_H
 #define TEST_H
 
-class TEST
-{
+namespace kilas {
+
+class TEST {
 public:
     TEST();
 
@@ -11,5 +12,7 @@ public:
     static void testClubManager();
     static void testAthleteManager();
 };
+
+} //namespace testing
 
 #endif // TEST_H

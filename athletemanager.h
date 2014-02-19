@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 
+namespace kilas {
+
 /**
  * @brief The AthleteManager class manages the instances of Athletes
  */
@@ -114,5 +116,7 @@ private:
      */
     std::map<int, Athlete* const> idToAthleteMap_;
 };
+
+} //namespace kilas
 
 #endif // ATHLETEMANAGER_H

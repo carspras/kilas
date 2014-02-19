@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 
+namespace kilas {
+
 /**
  * @brief The ClubManager class manages the creation and deletion of Clubs.
  *
@@ -78,9 +80,11 @@ private:
     std::map<Club* const, unsigned int, compare_club> clubToIdMap_;
 
     /**
-     * @brief idToClubMap_ is the from the Club-IDs to the corresping Clubs.
+     * @brief idToClubMap_ is the map from the Club-IDs to the corresping Clubs.
      */
     std::map<unsigned int, Club* const> idToClubMap_;
 };
+
+} //namespace kilas
 
 #endif // CLUBMANAGER_H

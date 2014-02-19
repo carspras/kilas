@@ -1,5 +1,7 @@
 #include "athletemanager.h"
 
+using namespace kilas;
+
 AthleteManager::AthleteManager() {
 }
 

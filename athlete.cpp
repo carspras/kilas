@@ -1,5 +1,7 @@
 #include "athlete.h"
 
+using namespace kilas;
+
 Athlete::Athlete(unsigned short number) {
     number_ = number;
 }

@@ -5,6 +5,8 @@
 
 #include <string>
 
+namespace kilas {
+
 /**
  * @brief Each instance of the Athlete class represents an athlete with
  */
@@ -82,5 +84,7 @@ struct compare_athlete {
             return false;
     }
 };
+
+} //namespace kilas
 
 #endif // ATHLETE_H

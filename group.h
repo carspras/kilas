@@ -1,10 +1,15 @@
 #ifndef GROUP_H
 #define GROUP_H
 
-class Group
-{
+namespace kilas {
+
+class Group {
 public:
     Group();
+private:
+
 };
+
+} //namespace kilas
 
 #endif // GROUP_H
