@@ -6,7 +6,7 @@
 #include "athlete.h"
 
 #include <vector>
-
+#include <unordered_set>
 
 namespace kilas {
 
@@ -34,10 +34,10 @@ public:
     Bracket getBracket() const;
 
     /**
-     * @brief Returns a pointer to the Club of this Team.
-     * @return Pointer to the Club of this Team.
+     * @brief Returns the clubs of this Team.
+     * @return The clubs of this Team.
      */
-    Club* getClub() const;
+    std::unordered_set<Club*> getClubs() const;
 
     /**
      * @brief Returns a vector with pointers to the athletes of this Team.
@@ -49,7 +49,7 @@ private:
     /**
      * @brief Use TeamManager::createTeam() instead.
      */
-    Team(std::string name);
+    Team(std::string name, Bracket bracket);
 
     /**
      * @brief The name of this Team.
@@ -64,7 +64,7 @@ private:
     /**
      * @brief The Club or clubs this Team belongs to.
      */
-    Club* club_;
+    std::unordered_set<Club*> clubs_;
 
     /**
      * @brief The athletes that are part of this Team.

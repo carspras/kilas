@@ -2,10 +2,9 @@
 
 using namespace kilas;
 
-Team::Team(std::string name) {
+Team::Team(std::string name, Bracket bracket) {
     name_ = name;
-    bracket_ = Bracket::U8;
-    club_ = nullptr;
+    bracket_ = bracket;
 }
 
 std::string Team::getName() const {
@@ -16,8 +15,8 @@ Bracket Team::getBracket() const {
     return bracket_;
 }
 
-Club* Team::getClub() const {
-    return club_;
+std::unordered_set<Club*> Team::getClubs() const {
+    return clubs_;
 }
 
 std::vector<Athlete*> Team::getAthletes() const {
