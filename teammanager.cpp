@@ -12,11 +12,11 @@ unsigned int TeamManager::teamCount() const {
         return 0;
 }
 
-unsigned int TeamManager::createTeam(std::string name) {
+unsigned int TeamManager::createTeam(std::string name, Bracket bracket) {
     if (name.size() == 0 || nameInUse(name))
         return 0;
 
-    Team* const team = new Team(name);
+    Team* const team = new Team(name, bracket);
     unsigned int id = 1;
     if (idToTeamMap_.size() != 0)
         id = (idToTeamMap_.rbegin()->first) + 1;
@@ -27,16 +27,15 @@ unsigned int TeamManager::createTeam(std::string name) {
     return id;
 }
 
-bool TeamManager::deleteTeam(unsigned int id) {
-    Team* const team = getTeam(id);
-    if (team) {
-        idToTeamMap_.erase(id);
-        teamToIdMap_.erase(team);
-        delete(team);
-        return true;
-    }
+bool TeamManager::deleteTeam(Team* team) {
+    if (!team)
+        return false;
 
-    return false;
+    unsigned int id = getId(team);
+    idToTeamMap_.erase(id);
+    teamToIdMap_.erase(team);
+    delete(team);
+    return true;
 }
 
 unsigned int TeamManager::getId(Team * const team) const {
@@ -51,17 +50,74 @@ Team* TeamManager::getTeam(unsigned int id) const {
     return nullptr;
 }
 
-bool TeamManager::setNewName(Team *team, std::string newName) const {
-    if (!team || newName.size() == 0)
+bool TeamManager::setName(Team *team, std::string name) const {
+    if (!team || name.size() == 0)
         return false;
 
-    if (newName == team->getName())
+    if (name == team->getName())
         return true;
 
-    if (nameInUse(newName))
+    if (nameInUse(name))
         return false;
 
-    team->name_ = newName;
+    team->name_ = name;
+    return true;
+}
+
+bool TeamManager::setBracket(Team *team, Bracket bracket) const {
+    if (!team)
+        return false;
+
+    if (team->athletes_.size() != 0 && team->bracket_ != bracket)
+        return false;
+
+    team->bracket_ = bracket;
+    return true;
+}
+
+bool TeamManager::addClub(Team *team, Club *club) const {
+    if (!team || !club)
+        return false;
+
+    team->clubs_.insert(club);
+    return true;
+}
+
+bool TeamManager::removeClub(Team *team, Club *club) const {
+    if (!team || !club)
+        return false;
+
+    for (unsigned int i = 0; i < team->athletes_.size(); i++)
+        if (team->athletes_.at(i)->getClub() == club)
+            return false;
+
+    team->clubs_.erase(club);
+    return true;
+}
+
+bool TeamManager::addAthlete(Team *team, Athlete *athlete) const {
+    if (!team || !athlete)
+        return false;
+
+    if (team->clubs_.count(athlete->getClub()) == 0)
+        return false;
+
+    for (unsigned int i = 0; i < team->athletes_.size(); i++)
+        if (team->athletes_.at(i) == athlete)
+            return false;
+
+    team->athletes_.push_back(athlete);
+    return true;
+}
+
+bool TeamManager::removeAthlete(Team *team, Athlete *athlete) const {
+    if (!team || !athlete)
+        return false;
+
+    for (unsigned int i = 0; i < team->athletes_.size(); i++)
+        if (team->athletes_.at(i) == athlete)
+            team->athletes_.erase(team->athletes_.begin() + i);
+
     return true;
 }
 

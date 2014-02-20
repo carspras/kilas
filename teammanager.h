@@ -32,14 +32,14 @@ public:
      * If the specified name is already in use or if name is empty, no new
      * Team is created and the return value is 0.
      */
-    unsigned int createTeam(std::string name);
+    unsigned int createTeam(std::string name, Bracket bracket);
 
     /**
-     * @brief Deletes the Team with the specified ID.
-     * @param id The Id of the to be deleted Team.
-     * @return false if no Club with the ID was found.
+     * @brief Deletes the Team
+     * @param team
+     * @return true if the team was deleted.
      */
-    bool deleteTeam(unsigned int id);
+    bool deleteTeam(Team* team);
 
     /**
      * @brief Returns the ID of the specified Team.
@@ -56,12 +56,62 @@ public:
     Team* getTeam(unsigned int id) const;
 
     /**
-     * @brief Sets newName as the name for team, if that name is not already in use.
+     * @brief Sets name as the name for team, if that name is not already in use.
      * @param team
-     * @param newName The new name for team.
+     * @param name The new name for the team.
      * @return true if the name is not already in use, false else.
      */
-    bool setNewName(Team* team, std::string newName) const;
+    bool setName(Team* team, std::string name) const;
+
+    /**
+     * @brief Sets bracket as the new bracket for the team.
+     * @param team
+     * @param bracket The new bracket for the team.
+     * @return true if the bracket of team was set to the new bracket, false else.
+     *
+     * Will return false if the team already has athletes. You have to remove all athletes before
+     * the bracket of the team can be changed.
+     */
+    bool setBracket(Team* team, Bracket bracket) const;
+
+    /**
+     * @brief Adds the club to the team.
+     * @param team
+     * @param club
+     * @return true if the club was added to the team, false else.
+     */
+    bool addClub(Team* team, Club* club) const;
+
+    /**
+     * @brief Removes the club from the team if possible.
+     * @param team
+     * @param club
+     * @return true if the club was removed from the team or if the club was not a
+     *  part of this team, false else.
+     *
+     * If an athlete in this team is from the club, the club will not be removed and the function
+     * returns false. You have to remove all athletes of a club from a team before removing the club.
+     */
+    bool removeClub(Team* team, Club* club) const;
+
+    /**
+     * @brief Adds the athlete to this team if possible.
+     * @param team
+     * @param athlete
+     * @return true is the athlete was added to the team, false else.
+     *
+     * The athlete will only be added if its club belongs to the team.
+     */
+    bool addAthlete(Team* team, Athlete* athlete) const;
+
+    /**
+     * @brief Removes the athlete from this team if possible.
+     * @param team
+     * @param athlete
+     * @return true if the athlete was removed from the team or if the athlete was not
+     * a part of the team, false else.
+     */
+    bool removeAthlete(Team* team, Athlete* athlete) const;
 
 private:
     /**
